@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg-dark: #ffffff;
+  --color-bg-card: #f8fafc;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-accent: #059669;
+  /* Emerald 600 */
+  --color-accent-subtle: #d1fae5;
+  --color-highlight: #10b981;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Outfit', sans-serif;
+  --border-radius: 12px;
+  --card-border: 1px solid #e2e8f0;
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: var(--color-text-primary);
+}
+
+p {
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: var(--transition-fast);
+}
+
+/* Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 8rem 0;
+  position: relative;
+}
+
+.card {
+  background: var(--color-bg-card);
+  border: var(--card-border);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+/* Custom Form Elements */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--color-accent);
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+input[type="number"] {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+  padding: 0.5rem;
+  border-radius: 6px;
+  width: 80px;
+}
+
+/* Sticky Summary */
+.summary-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid #e2e8f0;
+  padding: 1rem 2rem;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .summary-bar {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+@media print {
+
+  /* Hide interactive/decorative elements */
+  button,
+  nav,
+  .animate-fade-in,
+  .hero-bg,
+  .video-bg {
+    display: none !important;
+  }
+
+  /* Reset colors for print */
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  .card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .text-white,
+  .text-gray-300,
+  .text-gray-400 {
+    color: black !important;
+  }
+
+  .text-accent {
+    color: #b8860b !important;
+    /* Darker gold for print */
+  }
+
+  /* Make summary static */
+  .summary-bar {
+    position: static;
+    background: none;
+    border-top: 2px solid black;
+    box-shadow: none;
+    margin-top: 2rem;
+    padding: 0;
+  }
+
+  /* Layout adjustments */
+  .section {
+    padding: 2rem 0;
+  }
+
+  /* Ensure grids display properly */
+  .grid {
+    display: block;
+  }
+
+  .grid>* {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  /* Show checkbox state clearly */
+  input[type="checkbox"] {
+    appearance: auto;
+    border: 1px solid black;
+  }
+}
